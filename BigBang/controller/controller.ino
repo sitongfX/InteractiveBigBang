@@ -16,7 +16,7 @@ void setup() {
 }
 
 // button - ground and pin 15, pressed as 0, normal as 1
-// potentionmeter pin 12
+// potentiometer pin 12
 // joystick VRy(27)-white Vrx(26) black
 //
 

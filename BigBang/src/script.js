@@ -3,37 +3,41 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 
-//when the user clicks anywhere on the page
-document.addEventListener('click', async () => {
-    // Prompt user to select any serial port.
-    var port = await navigator.serial.requestPort();
-    // be sure to set the baudRate to match the ESP32 code
-    await port.open({ baudRate: 250000 });
+/**
+* to avoid hardware breaking down any moment which could cause damage to the universe
+* the below hardware related part is commented out for now;
+*/
+// //when the user clicks anywhere on the page
+// document.addEventListener('click', async () => {
+//     // Prompt user to select any serial port.
+//     var port = await navigator.serial.requestPort();
+//     // be sure to set the baudRate to match the ESP32 code
+//     await port.open({ baudRate: 250000 });
   
-    let decoder = new TextDecoderStream();
-    inputDone = port.readable.pipeTo(decoder.writable);
-    inputStream = decoder.readable;
+//     let decoder = new TextDecoderStream();
+//     inputDone = port.readable.pipeTo(decoder.writable);
+//     inputStream = decoder.readable;
   
-    reader = inputStream.getReader();
-    readLoop();
+//     reader = inputStream.getReader();
+//     readLoop();
   
-});
+// });
 
 
-async function readLoop() {
-    counterVal = 0;
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) {
-        // Allow the serial port to be closed later.
-        console.log("closing connection")
-        reader.releaseLock();
-        break;
-      }
-      if (value) {
+// async function readLoop() {
+//     counterVal = 0;
+//     while (true) {
+//       const { value, done } = await reader.read();
+//       if (done) {
+//         // Allow the serial port to be closed later.
+//         console.log("closing connection")
+//         reader.releaseLock();
+//         break;
+//       }
+//       if (value) {
   
-        try {
-            let jsonData = JSON.parse(value);
+//         try {
+//             let jsonData = JSON.parse(value);
             // console.log(jsonData);
 
             // Debug
@@ -47,12 +51,16 @@ async function readLoop() {
 
             // controller
             const parameters = {}
-            parameters.count = jsonData.P
-            parameters.size = jsonData.B
+            // parameters.count = jsonData.P
+            // parameters.size = jsonData.B
+            parameters.count = 7000
+            parameters.size = 0.01
             parameters.radius = 4
-            parameters.branches = jsonData.X
+            // parameters.branches = jsonData.X
+            // parameters.randomness = jsonData.Y 
+            parameters.branches = 10
             parameters.spin = 2.5
-            parameters.randomness = jsonData.Y 
+            parameters.randomness = 1
             parameters.randomnessPower = 3
             parameters.insideColor = '#ff6030'
             parameters.outsideColor = '#1b3984'
@@ -159,9 +167,7 @@ async function readLoop() {
                 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
             })
 
-            /**
-             * Camera
-             */
+      
             // Base camera
             const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
             camera.position.x = 3
@@ -203,12 +209,12 @@ async function readLoop() {
 
             tick()
 
-}
-catch (e) {
-  continue;
-}
+// }
+// catch (e) {
+//   continue;
+// }
 
 
-}
-}
-};
+// }
+// }
+// };
