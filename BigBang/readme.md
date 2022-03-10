@@ -1,6 +1,6 @@
 # Interactive Big Bang
 
-The project uses interactive controller to manipulate and create one's custom universe. See detailed [project](https://water-honeydew-380.notion.site/Interactive-Big-Bang-82fa3e4c468e4e0d86211cccd4c22275)page for hardware guide.
+The project uses interactive controller to manipulate and create one's custom universe. See detailed [project](https://water-honeydew-380.notion.site/Interactive-Big-Bang-82fa3e4c468e4e0d86211cccd4c22275) page for hardware guide.
 
 space: 
 ![space](space.png)
